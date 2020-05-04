@@ -6,6 +6,8 @@ from .models import Article
 from .serializers import ArticleSerializer
 from django.http import Http404
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 # Create your views here.
 
@@ -16,6 +18,8 @@ class ArticleList(generics.ListCreateAPIView):
 
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -23,6 +27,8 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     
 
 
